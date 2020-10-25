@@ -20,17 +20,21 @@ cv2.createTrackbar("Value Max", "TrackBars", 255, 255, empty)
 
 # H - (95, 118) | S - (152, 255) | V - (0, 255)
 
+for shirt in os.listdir(BLUE_SHIRTS_PATH):
+    print(shirt)
+
 while True:
     #################### READ IMAGES
 
     shirts, shirts_HSV = np.array([]), np.array([])
     for shirt in os.listdir(BLUE_SHIRTS_PATH):
-        shirt_img = cv2.imread(f"{BLUE_SHIRTS_PATH}/{shirt}")
-        shirt_img = cv2.resize(shirt_img, (IMG_WIDTH, IMG_HEIGHT))
-        shirts = np.expand_dims(shirt_img, axis=0) if shirts.size == 0 else np.append(shirts, np.expand_dims(shirt_img, axis=0), axis=0)
+        if any(ext in shirt for ext in ["jpg", "jpeg", "png"]):
+            shirt_img = cv2.imread(f"{BLUE_SHIRTS_PATH}/{shirt}")
+            shirt_img = cv2.resize(shirt_img, (IMG_WIDTH, IMG_HEIGHT))
+            shirts = np.expand_dims(shirt_img, axis=0) if shirts.size == 0 else np.append(shirts, np.expand_dims(shirt_img, axis=0), axis=0)
 
-        shirt_img_HSV = cv2.cvtColor(shirt_img, cv2.COLOR_BGR2HSV)
-        shirts_HSV = np.expand_dims(shirt_img_HSV, axis=0) if shirts_HSV.size == 0 else np.append(shirts_HSV, np.expand_dims(shirt_img_HSV, axis=0), axis=0)
+            shirt_img_HSV = cv2.cvtColor(shirt_img, cv2.COLOR_BGR2HSV)
+            shirts_HSV = np.expand_dims(shirt_img_HSV, axis=0) if shirts_HSV.size == 0 else np.append(shirts_HSV, np.expand_dims(shirt_img_HSV, axis=0), axis=0)
 
     if shirts.shape[0] % IMGS_PER_ROW != 0:
         for i in range(IMGS_PER_ROW - (shirts.shape[0] % IMGS_PER_ROW)):
