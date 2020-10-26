@@ -11,24 +11,21 @@ def empty(arg):
 # CREATE TRACKBAR WINDOW
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars", 640, 240)
-cv2.createTrackbar("Hue Min", "TrackBars", 0, 179, empty)
-cv2.createTrackbar("Hue Max", "TrackBars", 179, 179, empty)
-cv2.createTrackbar("Saturation Min", "TrackBars", 0, 255, empty)
-cv2.createTrackbar("Saturation Max", "TrackBars", 255, 255, empty)
-cv2.createTrackbar("Value Min", "TrackBars", 0, 255, empty)
-cv2.createTrackbar("Value Max", "TrackBars", 255, 255, empty)
+cv2.createTrackbar("Hue Min", "TrackBars", lowerb[0], 179, empty)
+cv2.createTrackbar("Hue Max", "TrackBars", upperb[0], 179, empty)
+cv2.createTrackbar("Saturation Min", "TrackBars", lowerb[1], 255, empty)
+cv2.createTrackbar("Saturation Max", "TrackBars", upperb[1], 255, empty)
+cv2.createTrackbar("Value Min", "TrackBars", lowerb[2], 255, empty)
+cv2.createTrackbar("Value Max", "TrackBars", upperb[2], 255, empty)
 
-# H - (95, 118) | S - (152, 255) | V - (0, 255)
-
-for shirt in os.listdir(BLUE_SHIRTS_PATH):
-    print(shirt)
+# H - (90, 125) | S - (25, 255) | V - (0, 255)
 
 while True:
     #################### READ IMAGES
 
     shirts, shirts_HSV = np.array([]), np.array([])
     for shirt in os.listdir(BLUE_SHIRTS_PATH):
-        if any(ext in shirt for ext in ["jpg", "jpeg", "png"]):
+        if any(ext in shirt for ext in FILE_EXTENSIONS):
             shirt_img = cv2.imread(f"{BLUE_SHIRTS_PATH}/{shirt}")
             shirt_img = cv2.resize(shirt_img, (IMG_WIDTH, IMG_HEIGHT))
             shirts = np.expand_dims(shirt_img, axis=0) if shirts.size == 0 else np.append(shirts, np.expand_dims(shirt_img, axis=0), axis=0)
