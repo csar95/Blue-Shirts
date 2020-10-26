@@ -1,3 +1,3 @@
 # Blue-Shirts
 
-Unzip the tar.gz file in the "Resources" folder.
+Got dataset from app.goldenspear.com/shirts.tar.gz.
