@@ -38,8 +38,8 @@ def getBoundingBox(img, mask):
             x, y, width, height = cv2.boundingRect(approx)
 
             # Draw a rectangle around the detected area
-            cv2.rectangle(img, pt1=(x, y), pt2=(x + width, y + height), color=(255, 0, 255), thickness=2)
-            cv2.putText(img, str(area), org=(x, y + 20), fontFace=cv2.FONT_HERSHEY_COMPLEX, fontScale=0.5, color=(255, 0, 0), thickness=1)
+            # cv2.rectangle(img, pt1=(x, y), pt2=(x + width, y + height), color=(255, 0, 255), thickness=2)
+            # cv2.putText(img, str(area), org=(x, y + 20), fontFace=cv2.FONT_HERSHEY_COMPLEX, fontScale=0.5, color=(255, 0, 0), thickness=1)
 
     return total_area > AREA_THRESHOLD
 
